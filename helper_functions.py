@@ -52,18 +52,18 @@ def plot_confusion_matrix(y_true, y_pred, class_names, figsize=(10, 7)):
     plt.ylabel('Actual')
     plt.show()
 
-def display_prediction(model, image_path, class_names=['AI_GENERATED', 'REAL']):
+def display_prediction(model, image):
     """
-    Pre-processes an uploaded image and uses the model to predict the class.
-    Displays the image along with the prediction.
+    Predicts the class of an uploaded image (PIL.Image object) using the given model.
+    Returns the prediction text.
     """
-    img = pre_process_image(image_path)
-    img_array = tf.expand_dims(img, 0)  # Model expects a batch
-
+    img_array = pre_process_image(image)
     prediction = model.predict(img_array)
-    predicted_class = class_names[int(tf.round(prediction)[0][0])]  # Binary classification
+    predicted_class = np.argmax(prediction, axis=1)  # Adjusted for direct use of numpy's argmax
 
-    plt.imshow(img)
-    plt.title(f"Model Prediction: {predicted_class}")
-    plt.axis('off')
-    plt.show()
+    # Assuming class_names are globally defined or passed as an argument
+    class_names = ['AI_GENERATED', 'REAL']
+    predicted_class_name = class_names[predicted_class[0]]
+    
+    return f"Model Prediction: {predicted_class_name}"
+

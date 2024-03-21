@@ -33,18 +33,17 @@ def main():
     st.text('This is the web app for the AI artwork detector')
 
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    # In app.py, where you handle the uploaded image
     if uploaded_file is not None:
-        # Convert the file to an image
         image = Image.open(uploaded_file).convert('RGB')
-        
-        # Display the image
         st.image(image, caption='Uploaded Image', use_column_width=True)
-        
-        # Classify the image
-        prediction = classify_image(image, model)
-        
+
+        # Get the prediction
+        prediction_text = display_prediction(model, image)
+    
         # Display the classification result
-        st.write(f"Model Prediction: {prediction}")
+        st.write(prediction_text)
+
 
 if __name__ == "__main__":
     main()
