@@ -4,12 +4,15 @@ import tensorflow.keras.layers as lyrs
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from tensorflow.keras.optimizers import Adam
+from PIL import Image
+Image.MAX_IMAGE_PIXELS = None 
 
 # Define constants
 IMG_SIZE = 512
 BATCH_SIZE = 32
-EPOCHS = 20
+EPOCHS = 10
 DATASET_PATH = "./data"
+
 
 def build_model():
     model_base = MobileNetV2(input_shape=(IMG_SIZE, IMG_SIZE, 3), include_top=False)
