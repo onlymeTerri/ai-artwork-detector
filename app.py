@@ -5,6 +5,7 @@ import numpy as np
 
 # Assuming helper_functions.py is in the same directory and contains the necessary functions
 from helper_functions import pre_process_image
+from helper_functions import display_prediction
 
 # Load the model (make sure the path is correct relative to where you're running the Streamlit app)
 MODEL_PATH = 'model_best.keras'
