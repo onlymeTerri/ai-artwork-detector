@@ -10,6 +10,9 @@ from helper_functions import pre_process_image
 MODEL_PATH = 'model_best.keras'
 model = tf.keras.models.load_model(MODEL_PATH)
 
+# Define IMG_SIZE
+IMG_SIZE = 512  # Must match the size expected by your model
+
 def classify_image(image, model):
     # Process the uploaded image
     img = pre_process_image(image, IMG_SIZE)
