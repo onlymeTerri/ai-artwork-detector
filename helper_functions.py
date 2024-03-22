@@ -10,9 +10,7 @@ import seaborn as sns
 IMG_SIZE = 512
 
 def view_random_image(root_path, class_name):
-    """
-    Displays a random image from a specified class folder.
-    """
+
     path = os.path.join(root_path, class_name)
     random_filename = random.choice(os.listdir(path))
     img_path = os.path.join(path, random_filename)
@@ -22,29 +20,23 @@ def view_random_image(root_path, class_name):
     plt.axis('off')
     plt.show()
 
-def pre_process_image(image_path, img_size=IMG_SIZE):
-    """
-    Pre-processes an image to the format required by the model.
-    """
-    img = tf.io.read_file(image_path)
-    img = tf.image.decode_jpeg(img, channels=3)
-    img = tf.image.resize(img, [img_size, img_size])
-    img /= 255.0  # Normalize to [0,1] as done during training
-    return img
+def pre_process_image(image, img_size=IMG_SIZE):
+    
+    image_tensor = tf.convert_to_tensor(np.array(image), dtype=tf.float32)
+    image_resized = tf.image.resize(image_tensor, [img_size, img_size])
+    image_normalized = image_resized / 255.0
+    
+    return image_normalized
 
 def supervised_metrics(y_true, y_pred):
-    """
-    Prints common metrics for evaluating classification models.
-    """
+
     print("Accuracy: {:.2f}%".format(accuracy_score(y_true, y_pred) * 100))
     print("F1 Score:", f1_score(y_true, y_pred, average='binary'))
     print("Recall:", recall_score(y_true, y_pred, average='binary'))
     print("Precision:", precision_score(y_true, y_pred, average='binary'))
 
 def plot_confusion_matrix(y_true, y_pred, class_names, figsize=(10, 7)):
-    """
-    Plots a confusion matrix using seaborn.
-    """
+
     cm = tf.math.confusion_matrix(y_true, y_pred)
     plt.figure(figsize=figsize)
     sns.heatmap(cm, annot=True, fmt='g', xticklabels=class_names, yticklabels=class_names)
@@ -52,18 +44,5 @@ def plot_confusion_matrix(y_true, y_pred, class_names, figsize=(10, 7)):
     plt.ylabel('Actual')
     plt.show()
 
-def display_prediction(model, image):
-    """
-    Predicts the class of an uploaded image (PIL.Image object) using the given model.
-    Returns the prediction text.
-    """
-    img_array = pre_process_image(image)
-    prediction = model.predict(img_array)
-    predicted_class = np.argmax(prediction, axis=1)  # Adjusted for direct use of numpy's argmax
 
-    # Assuming class_names are globally defined or passed as an argument
-    class_names = ['AI_GENERATED', 'REAL']
-    predicted_class_name = class_names[predicted_class[0]]
-    
-    return f"Model Prediction: {predicted_class_name}"
 
