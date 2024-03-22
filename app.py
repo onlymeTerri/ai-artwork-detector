@@ -19,6 +19,16 @@ def classify_image(image, model):
     img = pre_process_image(image, IMG_SIZE)
     img_array = tf.expand_dims(img, 0)  # Create a batch containing the image
     
+    # Print out the dtype and shape of img_array
+    print("img_array dtype:", img_array.dtype)
+    print("img_array shape:", img_array.shape)
+    
+    # Make sure the shape is (1, IMG_SIZE, IMG_SIZE, 3)
+    assert img_array.shape == (1, IMG_SIZE, IMG_SIZE, 3), "Image shape is incorrect"
+    
+    # Make sure the dtype is float32
+    assert img_array.dtype == np.float32, "Image dtype is incorrect, expected float32"
+    
     # Make a prediction
     predictions = model.predict(img_array)
     predicted_class = np.argmax(predictions, axis=1)
