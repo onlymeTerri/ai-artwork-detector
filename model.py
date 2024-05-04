@@ -94,7 +94,7 @@ def train_and_evaluate_model(model, train_dataset, validation_dataset, epochs=EP
     print(f'Validation Loss: {val_loss:.4f}')
     print(f'Validation Accuracy: {val_accuracy:.4f}%')
 
-    # Optionally, return the history to inspect other metrics like training loss, etc.
+    
     return history
 
 def evaluate_on_scenery(model, images, labels):
@@ -125,17 +125,17 @@ def main():
 
     # Evaluate model performance on the test set for each scenery type
     for scenery, (images, labels) in test_datasets.items():
-        images = np.array(images)  # Ensure images is a NumPy array
-        labels = np.array(labels)  # Ensure labels is a NumPy array
+        images = np.array(images)  
+        labels = np.array(labels)  
         f1, precision, recall = evaluate_on_scenery(model, images, labels)
         print(f"{scenery} - F1 Score: {f1:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}")
 
     # Save the model
     model_filename = 'model_mobilenetv2.keras'
-    if os.path.isfile(model_filename):  # Check if the model file already exists
-        os.remove(model_filename)  # Remove it if it does
+    if os.path.isfile(model_filename):  
+        os.remove(model_filename)  
 
-    model.save(model_filename)  # Save the model with the new .keras extension
+    model.save(model_filename)  
     print(f"Model saved as {model_filename}")
     print(model.summary())
 
