@@ -1,7 +1,7 @@
 tensorflow
-keras==2.8.0
-pandas==1.4.2
-numpy==1.22.3
+keras
+pandas
+numpy
 streamlit
-opencv-python==4.6.0.66
+opencv-python
 pytorch
