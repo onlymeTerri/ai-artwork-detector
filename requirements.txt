@@ -6,4 +6,4 @@ streamlit
 opencv-python
 torch
 torchvision
-torch_lightning
+pytorch_lightning
