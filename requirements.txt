@@ -4,4 +4,4 @@ pandas
 numpy
 streamlit
 opencv-python
-pytorch
+torch
