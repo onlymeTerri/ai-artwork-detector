@@ -1,7 +1,7 @@
-streamlit
-tensorflow
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
+tensorflow==2.8.0
+keras==2.8.0
+pandas==1.4.2
+numpy==1.22.3
+streamlit==1.10.0
+opencv-python==4.6.0.66
+pytorch
