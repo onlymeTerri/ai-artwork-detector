@@ -1,6 +1,6 @@
 import streamlit as st
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image
+from tensorflow.keras.preprocessing import image as tf_image
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import numpy as np
 import os
@@ -92,7 +92,7 @@ def load_model(model_path):
             st.error("Unsupported file extension for model loading.")
             return None
         
-        st.write(f"Successfully loaded model from {model_path}")
+        #st.write(f"Successfully loaded model from {model_path}")
         return model
     except Exception as e:
         st.error(f"Error loading the model from {model_path}: {e}")
@@ -111,8 +111,8 @@ def preprocess_image(image_file):
 def predict(model, uploaded_file, model_choice):
     preprocessed_image = preprocess_image(uploaded_file)
     if model_choice == 'MobileNetV2': 
-        img = image.load_img(uploaded_file, target_size=IMG_SIZE)
-        img_array = image.img_to_array(img)
+        img = tf_image.load_img(uploaded_file, target_size=IMG_SIZE)
+        img_array = tf_image.img_to_array(img)
         img_array = preprocess_input(img_array)  # Make sure to match the training preprocessing
         img_array = np.expand_dims(img_array, axis=0)  # Model expects a batch of images
         predictions = model.predict(img_array)
