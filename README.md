@@ -1,4 +1,4 @@
-# Welcome to BT5153 AI-Generated Image Detector Project (Group 11)
+# BT5153 AI-Generated Image Detector Project (Group 11)
 
 ## Accessing the live version of the app:
 This app is live on streamlit: https://ai-generated-image-detector.streamlit.app
@@ -13,3 +13,6 @@ Please use this command to deploy the project locally:
 ```rb
 streamlit run app.py --server.enableXsrfProtection false --client.showErrorDetails false
 ```
+## Project Roadmap
+__MODEL_TRAINING_CODE__ : contains the training code of three nerual network model: __MobilenetV2__, __Resnet50__ & __Efficientnetb0__
+__XAI__ : contains the code file where we use explainable AI techniques to interpret and explain the decisions made by our models.
