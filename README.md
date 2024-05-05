@@ -1,4 +1,4 @@
-# ai-artwork-detector
+# Welcome to BT5153 AI-Generated Image Detector Project (Group 11)
 
 ## Accessing the live version of the app:
 This app is live on streamlit: https://ai-generated-image-detector.streamlit.app
